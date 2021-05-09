@@ -23,7 +23,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 
-public class Login_MAIN {
+public class Login_main {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
