@@ -1,0 +1,2 @@
+INDEX VERSION 1.131+/Users/harry/eclipse-workspace-bank/.metadata/.plugins/org.eclipse.jdt.core
+2888586291.index
