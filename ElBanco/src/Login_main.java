@@ -12,6 +12,10 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
@@ -76,9 +80,14 @@ class MarcoAcceso extends JFrame implements KeyListener, ActionListener{
 	private double saldoInicial;
 	private String contrasena;
 	private String tipoCuenta;
-	
+	private Connection con;
+	private  PreparedStatement p;
+	private ResultSet rs;
 	public MarcoAcceso(String title){
-		DBConfig db=new DBConfig();
+		 con = null;
+         p = null;
+         rs = null;
+    
 		setTitle(title);
 
 		//setBounds(300,150,260,300);
@@ -124,55 +133,36 @@ class MarcoAcceso extends JFrame implements KeyListener, ActionListener{
 	
 	@SuppressWarnings("unchecked")
 	private boolean checkUser(){
-		boolean checkU = true;
+		boolean checkU = false;
 		String user = jtfUser.getText();
 		char[] pass = jpfPass.getPassword();
-
+		String passConv = new String(pass);
 		ClientesDB []listaNueva = null;
 		
 		try{
+		    String sql = "Select users,password from USUARIOS where users = ? and password= ?";
+		    con = DBConfig.connectDB();
+		    PreparedStatement stmt = con.prepareStatement(sql);
+		    stmt.setString( 1, user );
+		    stmt.setString( 2, passConv );
+		    ResultSet rs=stmt.executeQuery();
+		    
+		    if (rs.next()) // userid found
+		    {
+		    	admin = 1;
+		    	checkU = true;
+		    }
+		    else  // user not found
+		    {
+		        System.out.println("Invalid UserId");
+		    }
+		    stmt.close();		
 			
-			ObjectInputStream leer_fichero = new ObjectInputStream(new FileInputStream("clientesBaseDatos.txt"));
 			
-			ArrayList<ClientesDB[]> personal_Recuperado = (ArrayList<ClientesDB[]>) leer_fichero.readObject();
-			
-			leer_fichero.close();
-			
-			listaNueva = new ClientesDB[personal_Recuperado.size()];
-			
-			personal_Recuperado.toArray(listaNueva);			
-			
-			
-		}catch(Exception e){
-//			System.out.println("fichero no encontrado");
-//			JOptionPane.showMessageDialog(this, "No existe lista de clientes asociados");
-		}		
-		
-		
-		String passConv = new String(pass);
-		
-		if(user.equals("admin") && passConv.equals("keyadmin")){
-			checkU = true;
-			admin = 1;
-			
-		}else{
-			for(int i = 0;i < listaNueva.length; i++){
-				if(user.equals(listaNueva[i].getUsuario()) && passConv.equals(listaNueva[i].getContrasena())){
-					nombre = listaNueva[i].getNombre();
-					apellido = listaNueva[i].getApellido();
-					usuario = listaNueva[i].getUsuario();
-					numCuenta = listaNueva[i].getNumCuenta();
-					saldoInicial = listaNueva[i].getSaldoInicial();
-					contrasena = listaNueva[i].getContrasena();
-					tipoCuenta = listaNueva[i].getTipoCuenta();
-					
-					checkU = true;
-					break;
-				}else{
-					checkU = false;
-				}
+		}catch(SQLException e)
+			{
+			    System.out.println(e);
 			}
-		}
 
 
 		if(checkU){
