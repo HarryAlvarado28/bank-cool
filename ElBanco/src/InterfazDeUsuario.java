@@ -300,7 +300,7 @@ public class InterfazDeUsuario<Reloj> extends JFrame implements ActionListener{
 			new EditaSaldoUsuario(nombre, apellido, usuario, numCuenta, saldoEnBanco,
 					 contrasena, tipoCuenta);
 			this.dispose();
-			Login_MAIN.main(null);
+			Login_main.main(null);
 			
 		}else if(jmiAyuda == e.getSource()){
 			jtaPantallaPrincipal.setText(ayuda + ayuda1 + ayuda2);
