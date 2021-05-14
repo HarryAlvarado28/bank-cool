@@ -138,7 +138,7 @@ class MarcoAcceso extends JFrame implements KeyListener, ActionListener {
 		ClientesDB[] listaNueva = null;
 
 		try {
-			String sql = "Select * from USUARIOS where users = ? and password= ?";
+			String sql = "Select * from USUARIOS where user_id = ? and password= ?";
 			con = DBConfig.connectDB();
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setString(1, user);

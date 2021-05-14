@@ -11,6 +11,10 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -57,8 +61,10 @@ public class AgregarCliente extends JFrame implements ActionListener{
 	private String numCuenta;
 	private ArrayList <ClientesDB> lista = new ArrayList<ClientesDB>();
 	private boolean permitidoContrasena, permitidoNomApell;
-	
+	private Connection con;
 	public AgregarCliente() {
+		con = null;
+
 		// TODO Auto-generated constructor stub
 		setBounds(alturaPantalla/2,anchoPantalla/4,340,310);
 //		setIconImage(miIcono);	
@@ -174,7 +180,7 @@ public class AgregarCliente extends JFrame implements ActionListener{
 					saldoInicial = Double.parseDouble("0");
 				}
 				//---------------------------------------------------------		
-				
+				System.out.print("se va a agrega clientes");
 				agregandoClientes(nombre, apellido, usuario, numCuenta, saldoInicial, contrasena, tipoCuenta);
 				
 				jpBotones.removeAll();  // remuevo los componentes anteriores 
@@ -206,33 +212,33 @@ public class AgregarCliente extends JFrame implements ActionListener{
 	@SuppressWarnings("unchecked")
 	private void agregandoClientes(String nombre, String apellido, String usuario, String numCuenta, double saldoInicial,
 			String contrasena, String tipoCuenta){
+		
 		try {
-			ObjectInputStream leer_fichero = new ObjectInputStream(new FileInputStream("clientesBaseDatos.txt"));
-			
-			ArrayList<ClientesDB[]> personal_Recuperado = (ArrayList<ClientesDB[]>) leer_fichero.readObject();
-			
-			leer_fichero.close();
-			
-			ClientesDB []listaNueva = new ClientesDB[personal_Recuperado.size()];
-			
-			personal_Recuperado.toArray(listaNueva);
-			
-			for(ClientesDB e: listaNueva){
-				lista.add(e);
-			}
-			
-		}catch (Exception e1) { }
+			String sqlInsertUsers = "INSERT INTO USUARIOS (user_id, password,rol) values (?,?,?)";
+			con = DBConfig.connectDB();
+			PreparedStatement stmtUser = con.prepareStatement(sqlInsertUsers);
+			stmtUser.setString(1, usuario);
+			stmtUser.setString(2, contrasena);
+			stmtUser.setString(3, "client");
+			stmtUser.executeUpdate();
+			stmtUser.close();
 		
-		lista.add(new ClientesDB(nombre, apellido, usuario, numCuenta, saldoInicial, contrasena, tipoCuenta));
-		
-		try{	
-			ObjectOutputStream escribiendo_fichero = new ObjectOutputStream(new FileOutputStream("clientesBaseDatos.txt"));
-			
-			escribiendo_fichero.writeObject(lista);
-			
-			escribiendo_fichero.close();
-			
-		}catch(Exception e){ }	
+
+			String sqlInsertData = "INSERT INTO DATOS (user_id,nombre,apellido,cuenta,saldo,tipo_cuenta) values (?,?,?,?,?,?)";
+			PreparedStatement stmtData = con.prepareStatement(sqlInsertData);
+			stmtData.setString(1, usuario);
+			stmtData.setString(2, nombre);
+			stmtData.setString(3, apellido);
+			stmtData.setString(4,numCuenta);
+			stmtData.setDouble(5, saldoInicial);
+			stmtData.setString(6, tipoCuenta);
+			stmtData.executeUpdate();
+			stmtData.close();
+			con.close();
+
+		} catch (SQLException e) {
+			System.out.println(e);
+		}	
 		
 	}	
 		
