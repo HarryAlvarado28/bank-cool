@@ -183,7 +183,7 @@ public class InterfazAdministrador extends JFrame implements ActionListener{
 				
 			}
 			this.dispose();
-			Login_MAIN.main(null);
+			Login_main.main(null);
 			
 		}else if(jmiAyuda == a.getSource()){
 			JOptionPane.showMessageDialog(this, ayuda, "Acerca de",JOptionPane.QUESTION_MESSAGE);

@@ -23,7 +23,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 
-public class Login_MAIN {
+public class Login_main {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -78,6 +78,7 @@ class MarcoAcceso extends JFrame implements KeyListener, ActionListener{
 	private String tipoCuenta;
 	
 	public MarcoAcceso(String title){
+		DBConfig db=new DBConfig();
 		setTitle(title);
 
 		//setBounds(300,150,260,300);
