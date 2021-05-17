@@ -147,6 +147,26 @@ class MarcoAcceso extends JFrame implements KeyListener, ActionListener {
 				String rol = rs.getString(4);
 				if (rol.equals("admin")) {
 					admin = 1;
+				} else {
+					String sql1 = "Select * from DATOS where user_id = ?";
+					PreparedStatement stmt1 = con.prepareStatement(sql1);
+					stmt1.setString(1, user.toLowerCase());
+					ResultSet rs1 = stmt1.executeQuery();
+
+					if (rs1.next()) // userid found
+					{
+						// nombre, apellido, usuario, numCuenta, saldoInicial,
+						// contrasena, tipoCuenta
+
+						usuario = rs1.getString("user_id");
+						System.out.printf("\n MI USUARIO-> %s", usuario);
+						nombre = rs1.getString("nombre");
+						apellido = rs1.getString("apellido");
+						numCuenta = rs1.getString("cuenta");
+						saldoInicial = Double.parseDouble(rs1.getString("saldo"));
+					} else // user not found
+						System.out.println("123 Invalid UserId");
+
 				}
 			} else // user not found
 			{
@@ -163,7 +183,6 @@ class MarcoAcceso extends JFrame implements KeyListener, ActionListener {
 			jtpMessage.setText(null);
 			jtpMessage.setBackground(getBackground());
 			add(jbEnter).setBounds(75, 160, 100, 40);
-
 		} else {
 			add(jtpMessage).setBounds(60, 140, 130, 40);
 			jtpMessage.setText(alet);
@@ -172,7 +191,6 @@ class MarcoAcceso extends JFrame implements KeyListener, ActionListener {
 			add(jbEnter).setBounds(75, 200, 100, 40);
 		}
 		return checkU;
-
 	}
 
 	@Override
@@ -208,14 +226,12 @@ class MarcoAcceso extends JFrame implements KeyListener, ActionListener {
 				this.dispose();
 				GUI_Administrador = new InterfazAdministrador();
 				GUI_Administrador.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
 				GUI_Administrador.setVisible(true);
 			} else if (acceso) {
 				this.dispose();
 				GUI_Cliente = new InterfazDeUsuario<Object>(nombre, apellido, usuario, numCuenta, saldoInicial,
 						contrasena, tipoCuenta);
 				GUI_Cliente.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
 				GUI_Cliente.setVisible(true);
 			}
 		}
@@ -243,9 +259,7 @@ class MarcoAcceso extends JFrame implements KeyListener, ActionListener {
 			g.drawImage(imagenFondo.getImage(), 0, 0, getWidth(), getHeight(), this);
 			setOpaque(false);
 			super.paintComponent(g);
-
 		}
-
 	}
 
 

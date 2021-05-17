@@ -58,7 +58,7 @@ public class InterfazAdministrador extends JFrame implements ActionListener{
 		JMenu jmUsuario = new JMenu("Administrador");
 		JMenu jmAyuda = new JMenu("Ayuda");
 		
-		jmiSession = new JMenuItem("Cerrar Sesi�n");
+		jmiSession = new JMenuItem("Cerrar Sesion");
 		
 		jmiAyuda = new JMenuItem("Ayuda");
 		jmiAcerca_de = new JMenuItem("Acerca de");	
@@ -66,7 +66,6 @@ public class InterfazAdministrador extends JFrame implements ActionListener{
 		//_________limpiar el action comand______________
 		jmUsuario.setActionCommand("");
 		jmiAcerca_de.setActionCommand("");
-		
 		//___________ponerlos a la escucha________________
 		jmiSession.addActionListener(this);
 		jmiAyuda.addActionListener(this);
