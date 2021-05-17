@@ -38,23 +38,22 @@ public class Login_main {
 		// MarcoBaseBankATM bankATM = new MarcoBaseBankATM();
 		// bankATM.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //		MarcoBaseBankATM();
-		//MarcoAcceso loginMarco = new MarcoAcceso("DMG Bank");
-		//loginMarco.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		
-		EventQueue.invokeLater(new Runnable(){
+		// MarcoAcceso loginMarco = new MarcoAcceso("DMG Bank");
+		// loginMarco.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		EventQueue.invokeLater(new Runnable() {
 
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
 				try {
-					MarcoAcceso frame = new  MarcoAcceso("DMG Bank");
+					MarcoAcceso frame = new MarcoAcceso("DMG Bank");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
-			});
+		});
 	}
 	// generando un metodo estatico para crear el objeto de la clase MarcoAcceso
 //	private static void MarcoBaseBankATM(){
@@ -140,8 +139,8 @@ class MarcoAcceso extends JFrame implements KeyListener, ActionListener {
 //		add(new LaminaConImagen()).setBounds(0, 0, 245, 295);
 //		this.setBackground(new Color(245,136,8));
 		setVisible(true);
-		
-		Container contetpane =getContentPane();
+
+		Container contetpane = getContentPane();
 		pan = new Panel();
 		contetpane.add(pan);
 	}
@@ -165,13 +164,13 @@ class MarcoAcceso extends JFrame implements KeyListener, ActionListener {
 			String sql = "Select * from USUARIOS where user_id = ? and password= ?";
 			con = DBConfig.connectDB();
 			PreparedStatement stmt = con.prepareStatement(sql);
-			stmt.setString(1, user);
+			stmt.setString(1, user.toLowerCase());
 			stmt.setString(2, passConv);
 			ResultSet rs = stmt.executeQuery();
 
 			if (rs.next()) // userid found
 			{
-				checkU=true;
+				checkU = true;
 				String rol = rs.getString(4);
 				if (rol.equals("admin")) {
 					admin = 1;
@@ -259,54 +258,45 @@ class MarcoAcceso extends JFrame implements KeyListener, ActionListener {
 		// TODO Auto-generated method stub
 	}
 
-	
-	public class Panel extends JPanel{
+	public class Panel extends JPanel {
 
 		public Panel() {
-			this.setSize(400,280);	
-		}
-		
-		 public void paint(Graphics g) {
-		      Dimension tamanio = getSize();
-		      ImageIcon imagenFondo = new ImageIcon(getClass().getResource("/img/images.jpg"));
-			 g.drawImage(imagenFondo.getImage(), 0, 0, getWidth(), getHeight(), this);
-			 setOpaque(false);
-			 super.paintComponent(g);
-			 
-		 }
-
-	}
-	
-	/*
-	class LaminaConImagen extends JPanel {
-		private Image imagen;
-		URL ruta_externa = MarcoAcceso.LaminaConImagen.class.getResource("dise�oLogin5.png");
-
-		public LaminaConImagen() {
-//			URL ru = MarcoAcceso.class.getResource("dise�oLogin5.png");
-//			File mimagen = new File("src/img/dise�oLogin5.png");
-
-			try {
-				imagen = ImageIO.read(ruta_externa);
-
-//				imagen = ImageIO.read(ru);
-//				imagen = ImageIO.read(mimagen);
-			} catch (IOException e) {
-//				System.out.println("La imagen no se en cuentra");
-			}
+			this.setSize(400, 280);
 		}
 
-		public void paintComponent(Graphics g) {
+		public void paint(Graphics g) {
+			Dimension tamanio = getSize();
+			ImageIcon imagenFondo = new ImageIcon(getClass().getResource("/img/images.jpg"));
+			g.drawImage(imagenFondo.getImage(), 0, 0, getWidth(), getHeight(), this);
+			setOpaque(false);
 			super.paintComponent(g);
 
-			imagen.getWidth(this);
-			imagen.getHeight(this);
-			g.drawImage(imagen, 0, 0, null);
-
 		}
 
 	}
-	
-	*/
+
+	/*
+	 * class LaminaConImagen extends JPanel { private Image imagen; URL ruta_externa
+	 * = MarcoAcceso.LaminaConImagen.class.getResource("dise�oLogin5.png");
+	 * 
+	 * public LaminaConImagen() { // URL ru =
+	 * MarcoAcceso.class.getResource("dise�oLogin5.png"); // File mimagen = new
+	 * File("src/img/dise�oLogin5.png");
+	 * 
+	 * try { imagen = ImageIO.read(ruta_externa);
+	 * 
+	 * // imagen = ImageIO.read(ru); // imagen = ImageIO.read(mimagen); } catch
+	 * (IOException e) { // System.out.println("La imagen no se en cuentra"); } }
+	 * 
+	 * public void paintComponent(Graphics g) { super.paintComponent(g);
+	 * 
+	 * imagen.getWidth(this); imagen.getHeight(this); g.drawImage(imagen, 0, 0,
+	 * null);
+	 * 
+	 * }
+	 * 
+	 * }
+	 * 
+	 */
 
 }

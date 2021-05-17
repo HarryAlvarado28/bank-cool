@@ -33,14 +33,18 @@ public class EliminarClientes{
 	private void determinaUsuario(String usuarioModificar){
 		try {
 			
-			String sql = "DELETE From USUARIOS where user_id = ?";
+			String sqlUsuarios = "DELETE From USUARIOS where user_id = ?";
+			String sqlDatos = "DELETE From DATOS where user_id = ?";
 			System.out.println("Registro Eliminado");
 			con = DBConfig.connectDB();
-			PreparedStatement stmt = con.prepareStatement(sql);
+			PreparedStatement stmt = con.prepareStatement(sqlUsuarios);
+			PreparedStatement stmt1 = con.prepareStatement(sqlDatos);
 			stmt.setString(1, usuarioModificar);
 			stmt.executeUpdate();
-			
+			stmt1.setString(1, usuarioModificar);
+			stmt1.executeUpdate();
 			stmt.close();
+			stmt1.close();
 			con.close();
 			
 		
@@ -78,7 +82,7 @@ public class EliminarClientes{
 		}
 		
 	}
-	
+	/*
 	@SuppressWarnings("unchecked")
 	private void reemplazar(int index){
 		try {
@@ -106,5 +110,5 @@ public class EliminarClientes{
 		}catch(Exception e){ }	
 		
 	}
-	
+*/	
 }

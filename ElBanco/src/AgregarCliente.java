@@ -51,7 +51,7 @@ public class AgregarCliente extends JFrame implements ActionListener {
 	private Dimension tamanoPantalla = mipantalla.getScreenSize();
 	private int alturaPantalla = tamanoPantalla.height, anchoPantalla = tamanoPantalla.width;
 
-	private JLabel jlNombre, jlApellido, jlUsuario, jlNumsexo, jlNumsexomf, jlNumCuenta, jlSaldoInicial, jlContrasena,
+	private JLabel jlNombre, jlApellido, jlUsuario, jlNumCuenta, jlSaldoInicial, jlContrasena,
 			jlComen, jlTipoCuenta, jlMensaje, jlContrasenaConfirma;
 	private JTextField jtfNombre, jtfApellido, jtfNumCuenta, jtfSaldoInicial, jtfContrasena, jtfContrasenaConfirma;
 	private JButton jbAdd, jbCancelar, jbCerrar;
@@ -249,8 +249,9 @@ public class AgregarCliente extends JFrame implements ActionListener {
 		try {
 			String sqlInsertUsers = "INSERT INTO USUARIOS (user_id, password, rol) values (?,?,?)";
 			con = DBConfig.connectDB();
+			String user = usuario.toLowerCase();
 			PreparedStatement stmtUser = con.prepareStatement(sqlInsertUsers);
-			stmtUser.setString(1, usuario);
+			stmtUser.setString(1, user);
 			stmtUser.setString(2, contrasena);
 			stmtUser.setString(3, "client");
 			stmtUser.executeUpdate();
@@ -258,7 +259,7 @@ public class AgregarCliente extends JFrame implements ActionListener {
 
 			String sqlInsertData = "INSERT INTO DATOS (user_id,nombre,apellido,cuenta,saldo,tipo_cuenta,comentario) values (?,?,?,?,?,?,?)";
 			PreparedStatement stmtData = con.prepareStatement(sqlInsertData);
-			stmtData.setString(1, usuario);
+			stmtData.setString(1, user);
 			stmtData.setString(2, nombre);
 			stmtData.setString(3, apellido);
 			stmtData.setString(4, numCuenta);
