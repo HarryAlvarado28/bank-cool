@@ -1,6 +1,5 @@
 
 import java.awt.BorderLayout;
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -35,22 +34,10 @@ public class AgregarCliente extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 28;
 
-	// public static void main(String[] args) {
-	// // TODO Auto-generated method stub
-	// AgregarCliente h = new AgregarCliente();
-	// h.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	// }
-
 	private Toolkit mipantalla = Toolkit.getDefaultToolkit();
-	// private Image miIcono = mipantalla.getImage("src/img/iconBank.png");
-	// ---------------------------------------------------------------------------------
-	// private URL ruta_externa = AgregarCliente.class.getResource("iconBank.png");
-	// private Image miIcono = mipantalla.getImage(ruta_externa);
-	// ---------------------------------------------------------------------------------
 
 	private Dimension tamanoPantalla = mipantalla.getScreenSize();
 	private int alturaPantalla = tamanoPantalla.height, anchoPantalla = tamanoPantalla.width;
-
 	private JLabel jlNombre, jlApellido, jlUsuario, jlNumCuenta, jlSaldoInicial, jlContrasena,
 			jlComen, jlTipoCuenta, jlMensaje, jlContrasenaConfirma;
 	private JTextField jtfNombre, jtfApellido, jtfNumCuenta, jtfSaldoInicial, jtfContrasena, jtfContrasenaConfirma;
@@ -58,9 +45,6 @@ public class AgregarCliente extends JFrame implements ActionListener {
 	private JPanel jpInformacion, jpDatos, jpBotones, jpBtMsj;
 	private String nombre, apellido, usuario, contrasena, tipoCuenta, coment;
 	private JComboBox<String> jcbTipoCuenta, jcbUsuario;
-//	private JFrame jframe;
-//	private JRadioButton jRadioButton1, jRadioButton2;
-//	private ButtonGroup buttonGroup = new ButtonGroup();
 	private JTextArea comentario;
 	private JScrollPane sbrText;
 	private double saldoInicial;
@@ -71,9 +55,7 @@ public class AgregarCliente extends JFrame implements ActionListener {
 
 	public AgregarCliente() {
 		con = null;
-		// TODO Auto-generated constructor stub
 		setBounds(alturaPantalla / 2, anchoPantalla / 4, 340, 350);
-//		setIconImage(miIcono);	
 		setTitle("Agregar Cliente");
 		addInformacion();
 		setResizable(false);
@@ -100,9 +82,6 @@ public class AgregarCliente extends JFrame implements ActionListener {
 		jlApellido = new JLabel(" Apellido: ");
 		jlUsuario = new JLabel(" Usuario: ");
 
-//		jlNumsexo = new JLabel(" Sexo: ");
-//		jlNumsexomf = new JLabel("");
-
 		jlNumCuenta = new JLabel(" Numero de Cuenta: ");
 		jlSaldoInicial = new JLabel(" Saldo Inicial: ");
 		jlContrasena = new JLabel(" Contrasena: ");
@@ -113,13 +92,6 @@ public class AgregarCliente extends JFrame implements ActionListener {
 		jtfNombre = new JTextField(15);
 		jtfApellido = new JTextField(15);
 		jcbUsuario = new JComboBox<String>();
-
-//		jRadioButton1 = new JRadioButton("Masculino");
-//		jRadioButton2 = new JRadioButton("Femenino");
-//		buttonGroup.add(jRadioButton1);
-//		buttonGroup.add(jRadioButton2);
-//		jRadioButton1.setText("Masculino");
-//		jRadioButton2.setText("Femenino");
 		jtfNumCuenta = new JTextField(15);
 		jtfSaldoInicial = new JTextField(12);
 		jtfContrasena = new JTextField(12);
@@ -133,7 +105,6 @@ public class AgregarCliente extends JFrame implements ActionListener {
 		Date d = new Date();
 		jtfNumCuenta.setText(
 				d.getYear() + "-" + d.getMonth() + d.getDay() + "-" + d.getHours() + d.getMinutes() + d.getSeconds());
-//		jtfNumCuenta.setText("Asignacion Automatica");
 		jtfNumCuenta.setHorizontalAlignment(JTextField.CENTER);
 		jtfNumCuenta.setEditable(false);
 		comentario = new JTextArea();
@@ -153,9 +124,6 @@ public class AgregarCliente extends JFrame implements ActionListener {
 		jpInformacion.add(jlApellido);
 		jpInformacion.add(jlUsuario);
 
-//		jpInformacion.add(jlNumsexo);
-//		jpInformacion.add(jlNumsexomf);
-
 		jpInformacion.add(jlNumCuenta);
 		jpInformacion.add(jlSaldoInicial);
 		jpInformacion.add(jlContrasena);
@@ -166,19 +134,12 @@ public class AgregarCliente extends JFrame implements ActionListener {
 		jpDatos.add(jtfNombre);
 		jpDatos.add(jtfApellido);
 		jpDatos.add(jcbUsuario);
-//		jpDatos.add(jRadioButton1);
-//		jpDatos.add(jRadioButton2);
-//		jframe = new JFrame();
-//	jframe.add(buttonGroup);
-//		jpDatos.add(buttonGroup);
 		jpDatos.add(jtfNumCuenta);
 		jpDatos.add(jtfSaldoInicial);
 		jpDatos.add(jtfContrasena);
 		jpDatos.add(jtfContrasenaConfirma);
 		jpDatos.add(jcbTipoCuenta);
-
 		jpDatos.add(comentario);
-
 		jpBotones.add(jbAdd);
 		jpBotones.add(jbCancelar);
 
@@ -192,11 +153,10 @@ public class AgregarCliente extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
 
 		if (permitidoContrasena & permitidoNomApell) {
+			
 			if (jbAdd == e.getSource()) {
-
 				// -------Captura de los datos introducidos---------------
 				nombre = jtfNombre.getText();
 				apellido = jtfApellido.getText();
@@ -279,13 +239,10 @@ public class AgregarCliente extends JFrame implements ActionListener {
 
 		@Override
 		public void changedUpdate(DocumentEvent arg0) {
-			// TODO Auto-generated method stub
-
 		}
 
 		@Override
 		public void insertUpdate(DocumentEvent arg0) {
-			// TODO Auto-generated method stub
 			String nombre, item;
 			nombre = jtfNombre.getText();
 			item = nombre + jtfApellido.getText();
@@ -302,7 +259,6 @@ public class AgregarCliente extends JFrame implements ActionListener {
 
 		@Override
 		public void removeUpdate(DocumentEvent arg0) {
-			// TODO Auto-generated method stub
 			String item, nombre;
 			nombre = jtfNombre.getText();
 			item = nombre + jtfApellido.getText();
@@ -323,13 +279,10 @@ public class AgregarCliente extends JFrame implements ActionListener {
 
 		@Override
 		public void changedUpdate(DocumentEvent e) {
-			// TODO Auto-generated method stub
-
 		}
 
 		@Override
 		public void insertUpdate(DocumentEvent e) {
-			// TODO Auto-generated method stub
 			String apellido, item;
 			apellido = jtfApellido.getText();
 			item = apellido + jtfNombre.getText();
@@ -347,7 +300,6 @@ public class AgregarCliente extends JFrame implements ActionListener {
 
 		@Override
 		public void removeUpdate(DocumentEvent e) {
-			// TODO Auto-generated method stub
 			String item, apellido;
 			apellido = jtfApellido.getText();
 			item = apellido + jtfNombre.getText();
@@ -369,13 +321,10 @@ public class AgregarCliente extends JFrame implements ActionListener {
 
 		@Override
 		public void changedUpdate(DocumentEvent e) {
-			// TODO Auto-generated method stub
-
 		}
 
 		@Override
 		public void insertUpdate(DocumentEvent e) {
-			// TODO Auto-generated method stub
 			contrasena = jtfContrasena.getText();
 			if (contrasena.length() < 8 || contrasena.length() > 18) {
 				jtfContrasena.setBackground(Color.RED);
@@ -386,7 +335,6 @@ public class AgregarCliente extends JFrame implements ActionListener {
 
 		@Override
 		public void removeUpdate(DocumentEvent e) {
-			// TODO Auto-generated method stub
 			contrasena = jtfContrasena.getText();
 			if (contrasena.length() < 8 || contrasena.length() > 18) {
 				jtfContrasena.setBackground(Color.RED);
@@ -403,13 +351,10 @@ public class AgregarCliente extends JFrame implements ActionListener {
 
 		@Override
 		public void changedUpdate(DocumentEvent e) {
-			// TODO Auto-generated method stub
-
 		}
 
 		@Override
 		public void insertUpdate(DocumentEvent e) {
-			// TODO Auto-generated method stub
 			contrasena = jtfContrasena.getText();
 			contraConfirmar = jtfContrasenaConfirma.getText();
 			if (!contraConfirmar.equals(contrasena)) {
@@ -422,7 +367,6 @@ public class AgregarCliente extends JFrame implements ActionListener {
 
 		@Override
 		public void removeUpdate(DocumentEvent e) {
-			// TODO Auto-generated method stub
 			contrasena = jtfContrasena.getText();
 			contraConfirmar = jtfContrasenaConfirma.getText();
 			if (!contraConfirmar.equals(contrasena)) {

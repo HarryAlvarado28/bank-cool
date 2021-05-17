@@ -5,10 +5,10 @@ public class DBConfig {
 	  Connection con = null;
 	public static Connection connectDB(){
 		
-	//location where database is present in the system
+	//Ubicación de la base de dato 
 	String database= "C:\\Users\\opc\\Documents\\DATOS.accdb";
 	try {
-			//establishing connection
+			//Estableciendo conexión
 			Connection con = DriverManager.getConnection("jdbc:ucanaccess://"+database);
 
 			if(con!=null){
