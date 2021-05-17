@@ -195,7 +195,6 @@ public class InterfazDeUsuario<Reloj> extends JFrame implements ActionListener {
 		JPanel jpNorth = new JPanel(new BorderLayout());
 
 		JMenuBar menuBarra = new JMenuBar();
-//		System.out.println(usuario);
 		JMenu jmUsuario = new JMenu(usuario);
 		JMenu jmAyuda = new JMenu("Ayuda");
 
@@ -376,12 +375,10 @@ public class InterfazDeUsuario<Reloj> extends JFrame implements ActionListener {
 		double saldoInicial;
 		String contrasena, tipoCuenta;
 		int index;
-//		private boolean encontrado = false;
 
 		public EditaSaldoUsuario(String nombre, String apellido, String usuario, String numCuenta, double saldoInicial,
 				String contrasena, String tipoCuenta) {
 			System.out.println(usuario);
-			// index = determinaUsuario(usuario);
 			cargarDatos(usuario);
 			reemplazar(index, nombre, apellido, usuario, numCuenta, saldoInicial, contrasena, tipoCuenta);
 		}
@@ -399,20 +396,12 @@ public class InterfazDeUsuario<Reloj> extends JFrame implements ActionListener {
 				stmtUser.setString(1, userID);
 				ResultSet rs = stmtUser.executeQuery();
 				if (rs.next()) {
-					// = rs.getString("user_id");
+
 					nombre = rs.getString("nombre");
 					apellido = rs.getString("apellido");
-					// usuario = rs.getString("cuenta");
-					numCuenta = 12341234; // Int(rs.getString("cuenta"));
-					// contrasena = rs.getString("Saldo");
+					numCuenta = 12341234;
 					tipoCuenta = rs.getString("tipo_cuenta");
-					saldoBancario = 234.98;// Double(rs.getString("saldo"));
-					/*
-					 * listaDatos[1] = rs.getString("nombre"); listaDatos[2] =
-					 * rs.getString("apellido"); listaDatos[3] = rs.getString("cuenta");
-					 * listaDatos[4] = rs.getString("Saldo"); listaDatos[5] =
-					 * rs.getString("tipo_cuenta"); listaDatos[6] = rs.getString("comentario");
-					 */
+					saldoBancario = 234.98;
 					System.out.print(rs.getString("saldo"));
 				}
 			} catch (SQLException ex) {
@@ -435,15 +424,9 @@ public class InterfazDeUsuario<Reloj> extends JFrame implements ActionListener {
 				ClientesDB[] listaNueva = new ClientesDB[personal_Recuperado.size()];
 
 				personal_Recuperado.toArray(listaNueva);
-//				jtfNombre.setText("setendo desde usuariModfi");
 
 				for (ClientesDB e : listaNueva) {
-//					System.out.println(e.getApellido()); //Solo para verificar 
-//					lista.add(e);
-
 					if (e.getUsuario().equals(usuarioModificar)) {
-
-//						encontrado = true;
 						break;
 					}
 					i++;
