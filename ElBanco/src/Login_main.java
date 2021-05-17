@@ -34,13 +34,6 @@ import javax.swing.JTextPane;
 public class Login_main {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		// MarcoBaseBankATM bankATM = new MarcoBaseBankATM();
-		// bankATM.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		MarcoBaseBankATM();
-		// MarcoAcceso loginMarco = new MarcoAcceso("DMG Bank");
-		// loginMarco.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
 		EventQueue.invokeLater(new Runnable() {
 
 			@Override
@@ -55,11 +48,6 @@ public class Login_main {
 			}
 		});
 	}
-	// generando un metodo estatico para crear el objeto de la clase MarcoAcceso
-//	private static void MarcoBaseBankATM(){
-//		MarcoAcceso loginMarco = new MarcoAcceso("Bank $.$");
-//		loginMarco.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//	}
 
 }
 
@@ -74,13 +62,6 @@ class MarcoAcceso extends JFrame implements KeyListener, ActionListener {
 	private boolean acceso;
 
 	private Toolkit mipantalla = Toolkit.getDefaultToolkit();
-//	private Image miIcono = mipantalla.getImage("src/img/iconBank.png");
-
-	// ---------------------------------------------------------------------------------
-//	private URL ruta_externa = MarcoAcceso.class.getResource("iconBank.png");
-//	private Image miIcono = mipantalla.getImage(ruta_externa);
-	// ---------------------------------------------------------------------------------
-
 	private Dimension tamanoPantalla = mipantalla.getScreenSize();
 	private int alturaPantalla = tamanoPantalla.height;
 	private int anchoPantalla = tamanoPantalla.width;
@@ -108,10 +89,7 @@ class MarcoAcceso extends JFrame implements KeyListener, ActionListener {
 
 		setTitle(title);
 
-		// setBounds(300,150,260,300);
 		setBounds(alturaPantalla / 2, anchoPantalla / 4, 245, 295);
-//		setIconImage(miIcono);		
-
 		setResizable(false);
 		setLayout(null);
 
@@ -136,8 +114,6 @@ class MarcoAcceso extends JFrame implements KeyListener, ActionListener {
 		add(jpfPass).setBounds(60, 110, 130, 25);
 		add(jbEnter).setBounds(75, 160, 100, 40);
 
-//		add(new LaminaConImagen()).setBounds(0, 0, 245, 295);
-//		this.setBackground(new Color(245,136,8));
 		setVisible(true);
 
 		Container contetpane = getContentPane();
@@ -145,9 +121,6 @@ class MarcoAcceso extends JFrame implements KeyListener, ActionListener {
 		contetpane.add(pan);
 	}
 
-	/**
-	 * @return si existe acceso de usuario o no existe
-	 */
 	public boolean getAcceso() {
 		return acceso;
 	}
@@ -168,7 +141,7 @@ class MarcoAcceso extends JFrame implements KeyListener, ActionListener {
 			stmt.setString(2, passConv);
 			ResultSet rs = stmt.executeQuery();
 
-			if (rs.next()) // userid found
+			if (rs.next()) 
 			{
 				checkU = true;
 				String rol = rs.getString(4);
@@ -275,28 +248,5 @@ class MarcoAcceso extends JFrame implements KeyListener, ActionListener {
 
 	}
 
-	/*
-	 * class LaminaConImagen extends JPanel { private Image imagen; URL ruta_externa
-	 * = MarcoAcceso.LaminaConImagen.class.getResource("dise�oLogin5.png");
-	 * 
-	 * public LaminaConImagen() { // URL ru =
-	 * MarcoAcceso.class.getResource("dise�oLogin5.png"); // File mimagen = new
-	 * File("src/img/dise�oLogin5.png");
-	 * 
-	 * try { imagen = ImageIO.read(ruta_externa);
-	 * 
-	 * // imagen = ImageIO.read(ru); // imagen = ImageIO.read(mimagen); } catch
-	 * (IOException e) { // System.out.println("La imagen no se en cuentra"); } }
-	 * 
-	 * public void paintComponent(Graphics g) { super.paintComponent(g);
-	 * 
-	 * imagen.getWidth(this); imagen.getHeight(this); g.drawImage(imagen, 0, 0,
-	 * null);
-	 * 
-	 * }
-	 * 
-	 * }
-	 * 
-	 */
 
 }

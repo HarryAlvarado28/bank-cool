@@ -2,17 +2,7 @@
 
 import java.io.Serializable;
 
-/**
- * @author WorkStation-Harry
- *
- */
 public class ClientesDB implements Serializable{
-	/*
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	}
-	*/
 
 	private static final long serialVersionUID = 28;
 	private String nombre, apellido, usuario, contrasena, tipoCuenta;

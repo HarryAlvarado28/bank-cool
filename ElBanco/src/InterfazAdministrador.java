@@ -24,22 +24,9 @@ import javax.swing.Timer;
 
 @SuppressWarnings("serial")
 public class InterfazAdministrador extends JFrame implements ActionListener{
-//	public static void main(String[] args) {
-//	// TODO Auto-generated method stub
-//		InterfazAdministrador m = new InterfazAdministrador();
-//		m.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//	}
-
-	private Toolkit mipantalla = Toolkit.getDefaultToolkit();
-//	private Image miIcono = mipantalla.getImage("src/img/iconBank.png");
-	
+	private Toolkit mipantalla = Toolkit.getDefaultToolkit();	
 	URL ruta_externa = MarcoAcceso.class.getResource("iconBank.png");
 
-	//---------------------------------------------------------------------------------
-//	private URL ruta_externa = InterfazAdministrador.class.getResource("iconBank.png");
-//	private Image miIcono = mipantalla.getImage(ruta_externa);
-	//---------------------------------------------------------------------------------
-	
 	private Dimension tamanoPantalla = mipantalla.getScreenSize();
 	private int alturaPantalla = tamanoPantalla.height, anchoPantalla = tamanoPantalla.width;
 	
@@ -47,15 +34,11 @@ public class InterfazAdministrador extends JFrame implements ActionListener{
 	private JPanel jpBotones, jpSouth;
 	private JMenuItem jmiSession, jmiAyuda, jmiAcerca_de;
 	private AgregarCliente agregar;
-	private ReporteUsuarios ru;//= new ReporteUsuarios();
+	private ReporteUsuarios ru;
 	public InterfazAdministrador() {
-		// TODO Auto-generated constructor stub		
+			
 		super("DMG Bank - Sistema Administrador");
-
-//		setBounds(alturaPantalla/2,anchoPantalla/4,480,240);
 		setBounds(alturaPantalla/2,anchoPantalla/4,670,270); // con tabla activa
-//		setIconImage(miIcono);	
-		
 		addBotones();
 		add(new JLabel("Tabla de Usuarios Vacida"));
 		add(ru = new ReporteUsuarios(), BorderLayout.CENTER);
@@ -150,7 +133,6 @@ public class InterfazAdministrador extends JFrame implements ActionListener{
 	
 	@Override
 	public void actionPerformed(ActionEvent a) {
-		// TODO Auto-generated method stub
 		if(jbAgregarCliente == a.getSource()){
 			agregar = new AgregarCliente();
 			agregar.setVisible(true);
@@ -165,10 +147,8 @@ public class InterfazAdministrador extends JFrame implements ActionListener{
 			add(ru = new ReporteUsuarios(), BorderLayout.CENTER); // es mejor asi			
 			setSize(this.getWidth(), this.getHeight()+1);	
 			if(this.getHeight() > 273) setSize(670,272); 
-//			setSize(670,271);
 			
 		}else if(jbEliminarUsuario == a.getSource()){
-//			setSize(670,270);
 			new EliminarClientes(JOptionPane.showInputDialog("Usuario a Eliminar"));
 			//------auto actualizacion--------------------------------
 			remove(ru);

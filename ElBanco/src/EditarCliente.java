@@ -28,19 +28,8 @@ public class EditarCliente extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 28;
 
-//	public static void main(String[] args) {
-//		// TODO Auto-generated method stub
-//		AgregarCliente h = new AgregarCliente();
-//		h.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//	}
 
 	private Toolkit mipantalla = Toolkit.getDefaultToolkit();
-//	private Image miIcono = mipantalla.getImage("src/img/iconBank.png");
-	// ---------------------------------------------------------------------------------
-//	private URL ruta_externa = EditarCliente.class.getResource("iconBank.png");
-//	private Image miIcono = mipantalla.getImage(ruta_externa);
-	// ---------------------------------------------------------------------------------
-
 	private Dimension tamanoPantalla = mipantalla.getScreenSize();
 	private int alturaPantalla = tamanoPantalla.height, anchoPantalla = tamanoPantalla.width;
 
@@ -61,27 +50,20 @@ public class EditarCliente extends JFrame implements ActionListener {
 	private String userID;
 
 	public EditarCliente(String usuarioModificar) {
-		// TODO Auto-generated constructor stub
 		setBounds(alturaPantalla / 2, anchoPantalla / 4, 340, 310);
-//		setIconImage(miIcono);	
 		setTitle("Editar Cliente");
 		addInformacion(false);
-
 		userID = determinaUsuario(usuarioModificar);
-
 		setResizable(false);
 
 	}
 
 	public EditarCliente(String usuarioModificar, boolean cliente) {
-		// TODO Auto-generated constructor stub
 		setBounds(alturaPantalla / 2, anchoPantalla / 4, 340, 310);
-//		setIconImage(miIcono);	
 		setTitle("Mi Perfil");
 		addInformacion(cliente);
 
 		userID = determinaUsuario(usuarioModificar);
-		// userID = usuarioModificar;
 		setResizable(false);
 	}
 
@@ -97,7 +79,7 @@ public class EditarCliente extends JFrame implements ActionListener {
 
 			ResultSet rs = stmt.executeQuery();
 
-			if (rs.next()) // userid found
+			if (rs.next()) 
 			{
 				user_id = rs.getString("user_id");
 				System.out.printf("\n MI USUARIO-> %s", user_id);
@@ -107,7 +89,7 @@ public class EditarCliente extends JFrame implements ActionListener {
 				jtfNumCuenta.setText("" + rs.getString("cuenta"));
 				jtfSaldoInicial.setText("" + rs.getString("saldo"));
 				encontrado = true;
-			} else // user not found
+			} else 
 				System.out.println("Invalid UserId");
 			stmt.close();
 
@@ -116,7 +98,7 @@ public class EditarCliente extends JFrame implements ActionListener {
 			stmt1.setString(1, usuarioModificar.toLowerCase());
 			ResultSet rs1 = stmt1.executeQuery();
 
-			if (rs1.next()) // userid found
+			if (rs1.next()) 
 			{
 				System.out.printf("\n MI USUARIO-> %s", rs1.getString("user_id"));
 				jtfContrasena.setText(rs1.getString("password"));
@@ -131,29 +113,6 @@ public class EditarCliente extends JFrame implements ActionListener {
 		}
 
 		try {
-
-			/*
-			 * ObjectInputStream leer_fichero = new ObjectInputStream(new
-			 * FileInputStream("clientesBaseDatos.txt"));
-			 * 
-			 * ArrayList<ClientesDB[]> personal_Recuperado = (ArrayList<ClientesDB[]>)
-			 * leer_fichero.readObject();
-			 * 
-			 * leer_fichero.close();
-			 * 
-			 * ClientesDB []listaNueva = new ClientesDB[personal_Recuperado.size()];
-			 * 
-			 * personal_Recuperado.toArray(listaNueva);
-			 * 
-			 * for(ClientesDB e: listaNueva){ if(e.getUsuario().equals(usuarioModificar)){
-			 * jtfNombre.setText(e.getNombre()); jtfApellido.setText(e.getApellido());
-			 * jtfUsuario.setText(e.getUsuario()); jtfContrasena.setText(e.getContrasena());
-			 * jtfSaldoInicial.setText(""+e.getSaldoInicial());
-			 * jtfNumCuenta.setText(""+e.getNumCuenta()); encontrado = true; break; } i++;
-			 * 
-			 * }
-			 */
-
 			if (!encontrado) {
 				JOptionPane.showMessageDialog(this, "Usuario no encontrado");
 //				dispose();					
@@ -244,23 +203,17 @@ public class EditarCliente extends JFrame implements ActionListener {
 		// TODO Auto-generated method stub
 
 		if (jbAdd == e.getSource()) {
-
 			// -------Captura de los datos introducidos---------------
 			nombre = jtfNombre.getText();
 			apellido = jtfApellido.getText();
 			usuario = jtfUsuario.getText();
-
 			// ------------------Datos int y double---------------------
-//				numCuenta = Integer.parseInt(jtfNumCuenta.getText());
 			numCuenta = jtfNumCuenta.getText();
 			saldoInicial = Double.parseDouble(jtfSaldoInicial.getText());
 			// ----------------------------------------------------------
 			contrasena = jtfContrasena.getText();
 			tipoCuenta = (String) jcbTipoCuenta.getSelectedItem();
 
-			// Editar Base de Datos
-			// reemplazar(index, nombre, apellido, usuario, numCuenta, saldoInicial,
-			// contrasena, tipoCuenta);
 			agregandoClientes(userID, nombre, apellido, usuario, numCuenta, saldoInicial, contrasena, tipoCuenta);
 			jpBotones.removeAll(); // remuevo los componentes anteriores
 			jpBotones.add(jbCerrar); // agrego el un boton nuevo de cerrar
@@ -272,7 +225,6 @@ public class EditarCliente extends JFrame implements ActionListener {
 			jtfNumCuenta.setEditable(false);
 			jtfSaldoInicial.setEditable(false);
 			jtfContrasena.setEditable(false);
-//				System.out.println(jcbTipoCuenta.getSelectedItem());
 			jlMensaje.setHorizontalAlignment(JLabel.CENTER);
 			jlMensaje.setForeground(Color.GREEN.darker().darker().darker());
 			jpBtMsj.add(jlMensaje, BorderLayout.CENTER);
@@ -281,18 +233,12 @@ public class EditarCliente extends JFrame implements ActionListener {
 			dispose();
 		}
 
-//			String indicacion = 
-//					"El Cliente "+nombre+" "+apellido+" con N� de cuenta "+numCuenta+" tipo "+tipoCuenta+
-//					" pose un Saldo Inicial de B/. "+saldoInicial+"\n con las Credenciales de acceso "+
-//					"usuario: "+usuario+" y contrase�a: "+contrasena;
-//			JOptionPane.showMessageDialog(this, indicacion);
 	}
 
 	private void agregandoClientes(String user_id, String nombre, String apellido, String usuario, String numCuenta,
 			double saldoInicial, String contrasena, String tipoCuenta) {
 		System.out.printf("user_id---> %s", user_id);
 		try {
-//			String sqlInsertUsers = "INSERT INTO USUARIOS (user_id, password, rol) values (?,?,?)";
 			String sqlInsertUsers = "UPDATE USUARIOS SET password = ? WHERE user_id = ?";
 			con = DBConfig.connectDB();
 			String user = usuario.toLowerCase();
@@ -319,31 +265,4 @@ public class EditarCliente extends JFrame implements ActionListener {
 
 	}
 
-	/*
-	 * @SuppressWarnings("unchecked") private void reemplazar(int index, String
-	 * nombre, String apellido, String usuario, String numCuenta, double
-	 * saldoInicial, String contrasena, String tipoCuenta) { try { ObjectInputStream
-	 * leer_fichero = new ObjectInputStream(new
-	 * FileInputStream("clientesBaseDatos.txt")); ArrayList<ClientesDB[]>
-	 * personal_Recuperado = (ArrayList<ClientesDB[]>) leer_fichero.readObject();
-	 * leer_fichero.close();
-	 * 
-	 * personal_Recuperado.remove(index);
-	 * 
-	 * ClientesDB[] listaNueva = new ClientesDB[personal_Recuperado.size()];
-	 * personal_Recuperado.toArray(listaNueva);
-	 * 
-	 * for (ClientesDB e : listaNueva) { lista.add(e); }
-	 * 
-	 * lista.add(new ClientesDB(nombre, apellido, usuario, numCuenta, saldoInicial,
-	 * contrasena, tipoCuenta)); } catch (Exception e1) { }
-	 * 
-	 * try { ObjectOutputStream escribiendo_fichero = new ObjectOutputStream( new
-	 * FileOutputStream("clientesBaseDatos.txt"));
-	 * escribiendo_fichero.writeObject(lista); escribiendo_fichero.close();
-	 * 
-	 * } catch (Exception e) { }
-	 * 
-	 * }
-	 */
 }
