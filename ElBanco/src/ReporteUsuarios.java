@@ -1,6 +1,7 @@
 
 
 import java.awt.BorderLayout;
+
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
@@ -8,7 +9,20 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 public class ReporteUsuarios extends JPanel{
+
+
 
 	/**
 	 * 
@@ -26,6 +40,19 @@ public class ReporteUsuarios extends JPanel{
 //	private Dimension tamanoPantalla = mipantalla.getScreenSize();
 //	private int alturaPantalla = tamanoPantalla.height;
 //	private int anchoPantalla = tamanoPantalla.width;
+	 private JTable jTable1;
+	 private Connection con=null;
+	 private Statement sentencia;
+
+
+	DefaultTableModel tabla = new DefaultTableModel() {
+        @Override
+        public boolean isCellEditable(int Fila, int Colum) {
+            return false;
+        }
+    };
+
+
 	
 	
 	public ReporteUsuarios(){
@@ -34,11 +61,59 @@ public class ReporteUsuarios extends JPanel{
 //		setIconImage(miIcono);
 
 		setLayout(new BorderLayout());
+		//cargarTitulosColumas();
+		//cargarDatos();
 
 
 		addTablaClientes();
 		
 	}
+	
+/*
+	
+	public void cargarTitulosColumas(){
+		JTable jtTitulo = new JTable(1,7);
+        tabla.addColumn("Nombre");
+        tabla.addColumn("Apellido");
+        tabla.addColumn("Usuario");
+        tabla.addColumn("Numero De Cuenta");
+        tabla.addColumn("Saldo");
+        tabla.addColumn("Contrasena");
+        tabla.addColumn("Tipo de Cuenta");
+        tabla.addColumn("Comentario");
+        jtTitulo.setModel(tabla);
+    } 
+	
+	
+	
+    public void cargarDatos() {
+
+        String datos[] = new String[7];    //Variable que almacena los datos de la consulta
+        String sql = "SELECT * FROM DATOS";
+        try {
+            con = DBConfig.connectDB();
+      		PreparedStatement stmtUser = con.prepareStatement(sql);
+			ResultSet rs = stmtUser.executeQuery();
+
+            while (rs.next()) {                                    //Bucle que recorre la consulta obtenida
+                datos[0] = rs.getString("user_id");
+                datos[1] = rs.getString("nombre");
+                datos[2] = rs.getString("apellido");
+                datos[3] = rs.getString("cuenta");
+                datos[4] = rs.getString("Saldo");
+                datos[5] = rs.getString("tipo_cuenta");
+                datos[6] = rs.getString("comentario");
+                tabla.addRow(datos);
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al cargar los Datos\n" + ex);
+        }
+    }
+    
+    */
+   
+	
+	
 	
 	@SuppressWarnings("unchecked")
 	private void addTablaClientes(){
@@ -51,11 +126,14 @@ public class ReporteUsuarios extends JPanel{
 		JTable jtDatos = null;// = new JTable(9,6);
 
 		JScrollPane datos = null;//= new JScrollPane(jtDatos);	
-		String[] titulo = {"Nombre","Apellido","Usuario","N� Cuenta","Saldo","Contrase�a","Tipo Cuenta"};
 		
+		String[] titulo = {"Nombre","Apellido","Usuario","N. Cuenta","Saldo","Contrasena","Tipo Cuenta"};
+		
+	
 		//------------recolectando datos---------------
 		Object[][] tbBidimencional = null;
 		try{
+			/*
 			ObjectInputStream leer_fichero = new ObjectInputStream(new FileInputStream("clientesBaseDatos.txt"));
 			
 			ArrayList<ClientesDB[]> personal_Recuperado = (ArrayList<ClientesDB[]>) leer_fichero.readObject();
@@ -67,9 +145,18 @@ public class ReporteUsuarios extends JPanel{
 //			datos = new JScrollPane(jtDatos);	
 			ClientesDB []listaNueva = new ClientesDB[personal_Recuperado.size()];
 			personal_Recuperado.toArray(listaNueva);
+			*/
 			
-			tbBidimencional = new Object[s][7]; 
 			
+			//s = personal_Recuperado.size();
+			tbBidimencional = new Object[s][7];
+			
+			
+			
+			
+			
+			
+			/*
 			for(ClientesDB e: listaNueva){
 				
 				tbBidimencional[f][0] = e.getNombre();
@@ -89,7 +176,7 @@ public class ReporteUsuarios extends JPanel{
 //				jtDatos.setValueAt(e.getTipoCuenta(), f, 6);
 				f++;
 			}
-			
+			*/
 			jtDatos = new JTable(tbBidimencional,titulo);
 			datos = new JScrollPane(jtDatos);
 
@@ -110,6 +197,10 @@ public class ReporteUsuarios extends JPanel{
 		add(jpTablas,BorderLayout.CENTER);
 		
 	}
+	
+	
+	
+	
 
 	
 }

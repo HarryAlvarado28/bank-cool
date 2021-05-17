@@ -61,8 +61,7 @@ public class InterfazAdministrador extends JFrame implements ActionListener{
 		add(ru = new ReporteUsuarios(), BorderLayout.CENTER);
 		
 		areaSouth();
-		addMenuBarNorth();
-			 
+		addMenuBarNorth();		 
 	}
 	
 
@@ -101,7 +100,6 @@ public class InterfazAdministrador extends JFrame implements ActionListener{
 		menuBarra.setBackground(Color.green);
 		
 		//-----------------------------Reloj Fecha------------------------------------
-		
 		ActionListener Reloj2 = new ActionListener(){
 			public void actionPerformed(ActionEvent a){
 				Date ahora = new Date();
@@ -210,7 +208,7 @@ public class InterfazAdministrador extends JFrame implements ActionListener{
 			+ "  los usuarios que fueron editados, eliminados\n"
 			+ "  o agregados.\n"
 			+ " ELIMINAR USUARIOS: una de las opciones mas\n"
-			+ "  delicadas de la administraci�n es la de\n"
+			+ "  delicadas de la administracion es la de\n"
 			+ "  poder eliminar un cliente.\n";
 	
 	private String acerca_de = "\t\t~~ DMG BANK  ~~\n\n"

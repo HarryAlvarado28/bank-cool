@@ -12,6 +12,8 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -51,6 +53,8 @@ public class EditarCliente extends JFrame implements ActionListener{
 	private double saldoInicial;
 	private String numCuenta;
 	private ArrayList <ClientesDB> lista = new ArrayList<ClientesDB>();
+	private Connection con = null;
+	private PreparedStatement p = null;
 	
 	private boolean encontrado = false;
 	private int index;
